@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/order", orderRoutes);
 app.get("/", (req, res) => {
     res.send("Working API with /api/v1");
 });
