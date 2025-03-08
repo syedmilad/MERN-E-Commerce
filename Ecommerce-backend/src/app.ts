@@ -3,6 +3,7 @@ import userRoutes from "./routes/user.js";
 import productRoutes from "./routes/product.js";
 import orderRoutes from "./routes/order.js";
 import paymentRoutes from "./routes/payment.js";
+import dashboardRoutes from "./routes/stats.js";
 import { connectDB } from "./utils/features.js";
 import { errorMiddleWare } from "./middlewares/error.js";
 import NodeCache from "node-cache";
@@ -26,6 +27,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 app.get("/", (req, res) => {
   res.send("Working API with /api/v1");

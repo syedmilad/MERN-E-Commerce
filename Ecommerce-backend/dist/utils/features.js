@@ -12,7 +12,7 @@ export const connectDB = async (uri) => {
         process.exit(1);
     }
 };
-export const invalidateCache = async ({ product, admin, orders, userId }) => {
+export const invalidateCache = async ({ product, admin, orders, userId, }) => {
     if (product) {
         const productKeys = ["latest-product", "products", "allCategories"];
         const products = await Product.find({}).select("_id");
@@ -40,4 +40,12 @@ export const reduceStock = async (orderItems) => {
         product.stock -= order.quantity;
         await product.save();
     }
+};
+export const getRecordsByDateRange = async (Model, start, end) => {
+    return await Model.find({
+        createdAt: {
+            $gte: start,
+            $lte: end,
+        },
+    });
 };

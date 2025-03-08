@@ -18,7 +18,7 @@ export const invalidateCache = async ({
   product,
   admin,
   orders,
-  userId
+  userId,
 }: InvalidateCacheProps) => {
   if (product) {
     const productKeys = ["latest-product", "products", "allCategories"];
@@ -28,13 +28,13 @@ export const invalidateCache = async ({
     });
     myCache.del(productKeys);
   }
-  if(orders){
-    const ordersKeys: string[] = ["my-order",`my-order-${userId}`]
+  if (orders) {
+    const ordersKeys: string[] = ["my-order", `my-order-${userId}`];
     const orders = await Order.find({}).select("_id");
-    orders.forEach((o)=>{
-      ordersKeys.push(`my-order-${o._id}`)
-    })
-    myCache.del(ordersKeys)
+    orders.forEach((o) => {
+      ordersKeys.push(`my-order-${o._id}`);
+    });
+    myCache.del(ordersKeys);
   }
 };
 
@@ -48,4 +48,13 @@ export const reduceStock = async (orderItems: orderItemTypes[]) => {
     product.stock -= order.quantity;
     await product.save();
   }
+};
+
+export const getRecordsByDateRange = async (Model: any, start: any, end: any) => {
+  return await Model.find({
+    createdAt: {
+      $gte: start,
+      $lte: end,
+    },
+  });
 };
