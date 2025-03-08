@@ -2,6 +2,7 @@ import express from "express";
 import userRoutes from "./routes/user.js";
 import productRoutes from "./routes/product.js";
 import orderRoutes from "./routes/order.js";
+import paymentRoutes from "./routes/payment.js";
 import { connectDB } from "./utils/features.js";
 import { errorMiddleWare } from "./middlewares/error.js";
 import NodeCache from "node-cache";
@@ -24,6 +25,7 @@ app.use(morgan("dev"))
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/order", orderRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Working API with /api/v1");

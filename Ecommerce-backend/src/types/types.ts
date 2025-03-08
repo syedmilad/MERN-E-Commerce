@@ -70,3 +70,9 @@ export interface NewOrderRequestBody {
   discount: number;
   orderItems: orderItemTypes[];
 }
+
+
+export interface CoupenType {
+  code: string,
+  amount: number
+}
