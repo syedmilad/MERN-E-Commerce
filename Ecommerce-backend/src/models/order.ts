@@ -36,6 +36,7 @@ const schema = new mongoose.Schema(
     shippingCharges: {
       type: Number,
       required: true,
+      default: 0,
     },
     tax: {
       type: Number,
@@ -48,24 +49,25 @@ const schema = new mongoose.Schema(
     discount: {
       type: Number,
       required: true,
+      default: 0,
     },
     status: {
       type: String,
       enum: ["Processing", "Shipped", "Delivered"],
       default: "Processing",
     },
-    orderItems:[
-        {
-            name: String,
-            photo: String,
-            price: Number,
-            quantity: Number,
-            productId: {
-                type: mongoose.Types.ObjectId,
-                ref: "Product"
-            }
-        }
-    ]
+    orderItems: [
+      {
+        name: String,
+        photo: String,
+        price: Number,
+        quantity: Number,
+        productId: {
+          type: mongoose.Types.ObjectId,
+          ref: "Product",
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

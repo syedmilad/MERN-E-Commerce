@@ -1,6 +1,7 @@
 import express from "express";
 import userRoutes from "./routes/user.js";
 import productRoutes from "./routes/product.js";
+import orderRoutes from "./routes/order.js";
 import { connectDB } from "./utils/features.js";
 import { errorMiddleWare } from "./middlewares/error.js";
 import NodeCache from "node-cache";

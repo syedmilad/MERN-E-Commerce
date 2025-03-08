@@ -34,6 +34,7 @@ const schema = new mongoose.Schema({
     shippingCharges: {
         type: Number,
         required: true,
+        default: 0,
     },
     tax: {
         type: Number,
@@ -46,6 +47,7 @@ const schema = new mongoose.Schema({
     discount: {
         type: Number,
         required: true,
+        default: 0,
     },
     status: {
         type: String,
@@ -60,9 +62,9 @@ const schema = new mongoose.Schema({
             quantity: Number,
             productId: {
                 type: mongoose.Types.ObjectId,
-                ref: "Product"
-            }
-        }
-    ]
+                ref: "Product",
+            },
+        },
+    ],
 }, { timestamps: true });
 export const Order = mongoose.model("Order", schema);
