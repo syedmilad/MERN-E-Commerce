@@ -70,7 +70,7 @@ export const getLatestProduct = async (
       products = JSON.parse(myCache.get("latest-product") as string);
     } else {
       console.log({ cache: false });
-      products = await Product.find({}).sort({ createdAt: -1 }).limit(5);
+      products = await Product.find({}).sort({ createdAt: -1 }).limit(5); /** to descending order product listing */
 
       // Set cache with a TTL (e.g., 10 minutes)
       myCache.set("latest-product", JSON.stringify(products)); // 10 minutes
@@ -102,8 +102,8 @@ export const getAllCategories = async (
     if (myCache.has("allCategories")) {
       allCategories = JSON.parse(myCache.get("allCategories") as string);
     } else {
-      allCategories = await Product.distinct("category");
-      myCache.set("allCategories", JSON.stringify(allCategories));
+      allCategories = await Product.distinct("category"); // that returns the array of strings
+      myCache.set("allCategories", JSON.stringify(allCategories)); 
     }
 
     if (allCategories) {
@@ -130,7 +130,7 @@ export const getAdminProducts = async (
     if(myCache.has("products")){
         products = JSON.parse(myCache.get("products") as string)
     }else{
-        products = await Product.find({});
+        products = await Product.find({}); /** All Product listing */
         myCache.set('product',JSON.stringify(products))
     }
     if (products) {
@@ -310,7 +310,7 @@ async function createFakeProduct() {
       category: faker.commerce.department(),
       photo: faker.image.url(),
       createdAt: faker.date.past(),
-      updatedAt: faker.date.recent(),
+      updatedAt: faker.date.recent(),     
       __v: 0,
     };
 
@@ -322,7 +322,7 @@ async function createFakeProduct() {
 async function deleteProducts() {
   const product = await Product.find({}).skip(2);
   for (let i = 0; i < product.length; i++) {
-    const singleProduct = product[i];
+    const singleProduct = product[i]; 
     await singleProduct.deleteOne();
   }
   console.log({ sucess: true });

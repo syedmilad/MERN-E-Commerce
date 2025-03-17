@@ -21,6 +21,7 @@ export interface SearchProductQuery {
   stock?: string;
   category?: string;
   page?: string;
+  sort?: string;
 }
 export type ControllerType = (
   req: Request,
@@ -42,7 +43,7 @@ export type InvalidateCacheProps = {
   product?: boolean;
   orders?: boolean;
   admin?: boolean;
-  userId?: string
+  userId?: string;
 };
 
 export type orderItemTypes = {
@@ -71,8 +72,7 @@ export interface NewOrderRequestBody {
   orderItems: orderItemTypes[];
 }
 
-
 export interface CoupenType {
-  code: string,
-  amount: number
+  code: string;
+  amount: number;
 }

@@ -47,7 +47,7 @@ export const getLatestProduct = async (req, res, next) => {
         }
         else {
             console.log({ cache: false });
-            products = await Product.find({}).sort({ createdAt: -1 }).limit(5);
+            products = await Product.find({}).sort({ createdAt: -1 }).limit(5); /** to descending order product listing */
             // Set cache with a TTL (e.g., 10 minutes)
             myCache.set("latest-product", JSON.stringify(products)); // 10 minutes
             // Debug: Log the products being cached
@@ -73,7 +73,7 @@ export const getAllCategories = async (req, res, next) => {
             allCategories = JSON.parse(myCache.get("allCategories"));
         }
         else {
-            allCategories = await Product.distinct("category");
+            allCategories = await Product.distinct("category"); // that returns the array of strings
             myCache.set("allCategories", JSON.stringify(allCategories));
         }
         if (allCategories) {
@@ -97,7 +97,7 @@ export const getAdminProducts = async (req, res, next) => {
             products = JSON.parse(myCache.get("products"));
         }
         else {
-            products = await Product.find({});
+            products = await Product.find({}); /** All Product listing */
             myCache.set('product', JSON.stringify(products));
         }
         if (products) {
